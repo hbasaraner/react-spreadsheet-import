@@ -3,6 +3,7 @@ import type { SelectOption } from "../../types"
 import { customComponents } from "./MenuPortal"
 import { useStyleConfig } from "@chakra-ui/react"
 import type { Styles } from "../../steps/MatchColumnsStep/components/ColumnGrid"
+import { useRsi } from "../../hooks/useRsi"
 interface Props {
   onChange: (value: SelectOption | null) => void
   value?: SelectOption
@@ -13,18 +14,27 @@ interface Props {
 
 export const MatchColumnSelect = ({ onChange, value, options, placeholder, name }: Props) => {
   const styles = useStyleConfig("MatchColumnsStep") as Styles
+  const { customMatchSelectComponent } = useRsi()
+
   return (
-    <Select<SelectOption, false>
-      value={value || null}
-      colorScheme="gray"
-      useBasicStyles
-      onChange={onChange}
-      placeholder={placeholder}
-      options={options}
-      chakraStyles={styles.select}
-      menuPosition="fixed"
-      components={customComponents}
-      aria-label={name}
-    />
+    <>
+      {customMatchSelectComponent ? (
+        customMatchSelectComponent({ value, onChange, options, placeholder, name })
+      ) : (
+        <Select<SelectOption, false>
+          value={value || null}
+          isSearchable
+          colorScheme="gray"
+          useBasicStyles
+          onChange={onChange}
+          placeholder={placeholder}
+          options={options}
+          chakraStyles={styles.select}
+          menuPosition="fixed"
+          components={customComponents}
+          aria-label={name}
+        />
+      )}
+    </>
   )
 }
