@@ -80,7 +80,7 @@ export const TemplateColumn = <T extends string>({ column, onChange, onSubChange
                       </Text>
                     </Box>
                   </AccordionButton>
-                  <AccordionPanel pb={4} pr={3} display="flex" flexDir="column">
+                  <AccordionPanel pb={4} pr={3} display="flex" flexDir="column" height={400}>
                     {column.matchedOptions.map((option) => (
                       <SubMatchingSelect option={option} column={column} onSubChange={onSubChange} key={option.entry} />
                     ))}

@@ -18,7 +18,7 @@ export const SubMatchingSelect = <T extends string>({ option, column, onSubChang
   const value = options.find((opt) => opt.value == option.value)
 
   return (
-    <Box pl={2} pb="0.375rem" height={300}>
+    <Box pl={2} pb="0.375rem">
       <Text sx={styles.selectColumn.selectLabel}>{option.entry}</Text>
       <MatchColumnSelect
         value={value}
