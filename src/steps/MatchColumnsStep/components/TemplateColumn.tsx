@@ -1,23 +1,23 @@
 import {
-  Flex,
-  Text,
   Accordion,
-  AccordionItem,
   AccordionButton,
   AccordionIcon,
-  Box,
+  AccordionItem,
   AccordionPanel,
+  Box,
+  Flex,
+  Text,
   useStyleConfig,
 } from "@chakra-ui/react"
+import { MatchColumnSelect } from "../../../components/Selects/MatchColumnSelect"
 import { useRsi } from "../../../hooks/useRsi"
+import type { Translations } from "../../../translationsRSIProps"
+import type { Fields } from "../../../types"
 import type { Column } from "../MatchColumnsStep"
 import { ColumnType } from "../MatchColumnsStep"
-import { MatchIcon } from "./MatchIcon"
-import type { Fields } from "../../../types"
-import type { Translations } from "../../../translationsRSIProps"
-import { MatchColumnSelect } from "../../../components/Selects/MatchColumnSelect"
-import { SubMatchingSelect } from "./SubMatchingSelect"
 import type { Styles } from "./ColumnGrid"
+import { MatchIcon } from "./MatchIcon"
+import { SubMatchingSelect } from "./SubMatchingSelect"
 
 const getAccordionTitle = <T extends string>(fields: Fields<T>, column: Column<T>, translations: Translations) => {
   const fieldLabel = fields.find((field) => "value" in column && field.key === column.value)!.label
@@ -80,7 +80,14 @@ export const TemplateColumn = <T extends string>({ column, onChange, onSubChange
                       </Text>
                     </Box>
                   </AccordionButton>
-                  <AccordionPanel pb={4} pr={3} display="flex" flexDir="column" height={400}>
+                  <AccordionPanel
+                    pb={4}
+                    pr={3}
+                    display="flex"
+                    flexDir="column"
+                    height={400}
+                    style={{ overflow: "auto" }}
+                  >
                     {column.matchedOptions.map((option) => (
                       <SubMatchingSelect option={option} column={column} onSubChange={onSubChange} key={option.entry} />
                     ))}
