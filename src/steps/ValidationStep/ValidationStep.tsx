@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react"
-import { Box, Button, Heading, ModalBody, Switch, useStyleConfig, useToast } from "@chakra-ui/react"
+import { Box, Button, Heading, ModalBody, Switch, useStyleConfig, useToast, Text } from "@chakra-ui/react"
 import { ContinueButton } from "../../components/ContinueButton"
 import { useRsi } from "../../hooks/useRsi"
 import type { Meta } from "./types"
@@ -144,6 +144,7 @@ export const ValidationStep = <T extends string>({ initialData, file, onBack }: 
         <Box display="flex" justifyContent="space-between" alignItems="center" mb="2rem" flexWrap="wrap" gap="8px">
           <Heading sx={styles.heading}>{translations.validationStep.title}</Heading>
           <Box display="flex" gap="16px" alignItems="center" flexWrap="wrap">
+            <Text fontSize={"md"}>Toplam kayıt sayısı: {tableData?.length}</Text>
             <Button variant="outline" size="sm" onClick={deleteSelectedRows}>
               {translations.validationStep.discardButtonTitle}
             </Button>
