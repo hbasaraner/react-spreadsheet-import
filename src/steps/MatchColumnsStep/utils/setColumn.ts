@@ -14,9 +14,12 @@ export const setColumn = <T extends string>(
       const uniqueData = uniqueEntries(data || [], oldColumn.index) as MatchedOptions<T>[]
       const matchedOptions = autoMapSelectValues
         ? uniqueData.map((record) => {
-            const value = fieldOptions.find(
-              (fieldOption) => fieldOption.value === record.entry || fieldOption.label === record.entry,
-            )?.value
+            const value = fieldOptions.find((fieldOption) => {
+              return (
+                String(fieldOption.value).toLowerCase() === String(record.entry).toLowerCase() ||
+                String(fieldOption.label).toLowerCase() === String(record.entry).toLowerCase()
+              )
+            })?.value
             return value ? ({ ...record, value } as MatchedOptions<T>) : (record as MatchedOptions<T>)
           })
         : uniqueData
