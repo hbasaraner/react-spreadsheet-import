@@ -27,6 +27,8 @@ export const Basic = () => {
         isOpen={isOpen}
         onClose={onClose}
         onSubmit={setData}
+        isNavigationEnabled
+        autoMapSelectValues
         customMatchSelectComponent={() => <p>Custom</p>}
       />
       {!!data && (
